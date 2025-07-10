@@ -4,4 +4,9 @@ class TreeNode:
         self.leftChild = None
         self.rightChild = None
 
-    
+def preOrderTraversal(rootNode):
+    if not  rootNode:
+        return 
+    print(rootNode.data)
+    preOrderTraversal(rootNode.leftChild)
+    preOrderTraversal(rootNode.rightChild)
