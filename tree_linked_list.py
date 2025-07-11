@@ -1,5 +1,4 @@
-import LinkedList_Queue as queue
-
+from LinkedList__Queue import Queue
 class TreeNode:
     def __init__(self , data):
         self.data = data
@@ -26,3 +25,15 @@ def postOrderTraversal(rootNode):
     postOrderTraversal(rootNode.leftChild)
     postOrderTraversal(rootNode.rightChild)
     print(rootNode.data)
+
+def levelOrderTraversal(rootNode):
+    if not rootNode:
+        return
+    customQueue = Queue(rootNode)
+    while not(customQueue.isEmpty()):
+        root = customQueue.dequeue()
+        print(root.value.data)
+        if root.value.leftChild:
+            customQueue.enqueue(root.value.leftChild)
+        if root.value.rightChild:
+            customQueue.enqueue(root.value.rightChild)
