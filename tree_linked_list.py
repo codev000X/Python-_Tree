@@ -29,7 +29,8 @@ def postOrderTraversal(rootNode):
 def levelOrderTraversal(rootNode):
     if not rootNode:
         return
-    customQueue = Queue(rootNode)
+    customQueue = Queue()
+    customQueue.enqueue(rootNode)
     while not(customQueue.isEmpty()):
         root = customQueue.dequeue()
         print(root.value.data)
@@ -37,3 +38,4 @@ def levelOrderTraversal(rootNode):
             customQueue.enqueue(root.value.leftChild)
         if root.value.rightChild:
             customQueue.enqueue(root.value.rightChild)
+
