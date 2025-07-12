@@ -74,4 +74,66 @@ def insertBT(rootNode, newNode):
             else:
                 customQueue.rightChild(newNode)
                 return 'Node inserted successfully'
+def get_deepest_node(rootNode):
+    if not rootNode:
+        return
+    else:
+        customQueue = Queue()
+        customQueue.enqueue(rootNode)
+        while not(customQueue.isEmpty()):
+            root = customQueue.dequeue()
+            if root.value.leftChild:
+                customQueue.enqueue(root.value.leftChild)
+            if root.value.rightChild:
+                customQueue.enqueue(root.value.rightChild)
+    return root.value
 
+def delete_deepestNode(rootNode, dNode):
+    if not rootNode:
+        return
+    else:
+        customQueue = Queue()
+        customQueue.enqueue(rootNode)
+
+        while not(customQueue.isEmpty()):
+            root = customQueue.dequeue()
+            if root.value.leftChild:
+                if root.value.leftChild is dNode:
+                    root.value.leftChild = None
+                    return
+                else:
+                    customQueue.enqueue(root.value.leftChild)
+
+            if root.value.rightChild:
+                if root.value.rightChild is dNode:
+                    root.value.rightChild = None
+                    return
+                else:
+                    customQueue.enqueue(root.value.rightChild)
+
+def delete_node(rootNode, node):
+    if not rootNode:
+        return 'Binary tree does not exist'
+    else:
+        customQueue = Queue()
+        customQueue.enqueue(rootNode)
+        while not(customQueue.isEmpty()):
+            root = customQueue.dequeue()
+            if root.value.data == node:
+                dNode = get_deepest_node(rootNode)
+                root.value.data = dNode.data
+                delete_deepestNode(rootNode, dNode)
+                return 'Node deleted successfully.'
+            if root.value.leftChild:
+                customQueue.enqueue(root.value.leftChild)
+            if root.value.rightChild:
+                customQueue.enqueue(root.value.rightChild)
+
+        return 'Node not found.'
+
+def deleteBT(rootNode):
+    if not rootNode:
+        return 'Binary tree does not exist'
+    rootNode.data = None
+    rootNode.leftChild = None
+    rootNode.rightChild = None
