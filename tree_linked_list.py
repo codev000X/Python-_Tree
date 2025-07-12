@@ -54,3 +54,24 @@ def searchBT(rootNode , nodeValue):
             if root.value.rightChild:
                 customQueue.enqueue(root.value.rightChild)
         return f'Node with value {nodeValue} does not exist in the binary tree'
+
+def insertBT(rootNode, newNode):
+    if not rootNode:
+        rootNode = newNode
+        return 'Node inserted successfully'
+    else:
+        customQueue = Queue()
+        customQueue.enqueue(rootNode)
+        while not(customQueue.isEmpty()):
+            root = customQueue.dequeue()
+            if not root.value.leftChild:
+                customQueue.enqueue(rootNode.value.leftChild)
+            else:
+                customQueue.leftChild(newNode)
+                return 'Node inserted successfully'
+            if not root.value.rightChild:
+                customQueue.enqueue(rootNode.value.rightChild)
+            else:
+                customQueue.rightChild(newNode)
+                return 'Node inserted successfully'
+
