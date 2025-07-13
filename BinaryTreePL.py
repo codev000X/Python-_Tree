@@ -6,7 +6,7 @@ class BinaryTree:
 
     def insertNode(self , value):
         
-        if self.LastUsedIndex+1 = self.maxSize:
+        if self.LastUsedIndex+1 == self.maxSize:
             return "Tree is full"
         else:
             self.customList[self.LastUsedIndex + 1] = value
