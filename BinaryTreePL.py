@@ -40,3 +40,19 @@ class BinaryTree:
     def levelOrderTraversal(self , index):
         for i in range(index , self.lastUsedIndex + 1):
             print(self.customlist[i])
+
+    def deleteNode(self , value):
+        if self.lastUsedIndex == 0:
+            return 'Tree is Empty .'
+        
+        for i in range(1 , self.lastUsedIndex+1):
+            if self.customList[i] == value :
+                self.customList[i] = self.customList[self.lastUsedIndex]
+                self.customList[self.lastUsedIndex] = None
+                self.lastUsedIndex -= 1
+                return 'Node deleted succcessfully .'
+
+    def deleteBT(self):
+        self.customList = None
+        self.lastUsedIndex = 0
+        return 'Binary Tree deleted successfully.'
