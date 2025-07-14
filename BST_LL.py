@@ -114,4 +114,7 @@ def deleteNode(rootNode , nodeValue):
 
     return rootNode
 
-
+def deleteBT(rootNode):
+    rootNode.data = None
+    rootNode.leftChild = None
+    rootNode.rightChild = None
