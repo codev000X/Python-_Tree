@@ -57,3 +57,61 @@ def levelOrderTraversal(rootNode):
             customQueue.enqueue(rootNode.leftChild)
         if rootNode.rightChild is not None:
             customQueue.enqueue(rootNode.rightChild)
+
+
+def searchBT(rootNode , nodeValue):
+    if rootNode is None:
+        return 'Binary Tree is Empty .'
+
+    elif rootNode.data == nodeValue:
+        print("Found")
+
+    elif nodeValue > rootNode.data:
+        if rootNode.rightChild.data == nodeValue :
+            print("Found")
+        else:
+            searchBT(rootNode.rightChild , nodeValue)
+
+    elif nodeValue < rootNode.data:
+        if rootNode.leftChild.dataa == nodeValue:
+            print("Found")
+        else:
+            searchBT(rootNode.leftChild , nodeValue)
+
+
+def minValueNode(rootNode):
+    curr = rootNode
+    while curr.leftChild is None:
+        curr = curr.leftChild
+    return curr
+
+
+
+def deleteNode(rootNode , nodeValue):
+    if rootNode is None :
+        return rootNode
+    
+    elif nodeValue < rootNode.data :
+        rootNode.leftChild = deleteNode(rootNode.leftChild , nodeValue)
+
+    elif nodeValue > rootNode.data:
+        rootNode.rightChild = deleteNode(rootNode.rightChild , nodeValue)
+
+    else:
+        if rootNode.leftChild is None:
+            temp = rootNode.leftChild
+            rootNode = None
+            return temp
+
+        if rootNode.rightChild is None:
+            temp = rootNode.rightChild
+            rootNode = None
+            return temp
+
+        temp = minValueNode(rootNode.rightChild)
+        rootNode.data = temp.data
+        rootNode.rightChild = deleteNode(rootNode.rightChild , temp.data)
+
+    return rootNode
+
+
