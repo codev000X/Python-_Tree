@@ -56,7 +56,6 @@ def searchNode(rootNode , nodeValue):
         else:
             searchNode(rootNode.rightChild , nodeValue)
 
-
 def getHeight(rootNode):
     if not rootNode:
         return 0
@@ -108,3 +107,53 @@ def insertNode(rootNode, nodeValue):
         rootNode.rightChild = rightRotation(rootNode.rightChild)
         return leftRotation(rootNode)
     return rootNode
+
+def getMinValue(rootNode):
+    if not rootNode or rootNode.leftChild is None:
+        return rootNode
+    return getMinValue(rootNode.leftChild)
+
+def deleteNode(rootNode, nodeValue):
+    if rootNode is None:
+        return rootNode
+    
+    elif nodeValue > rootNode.data:
+        rootNode.rightChild = deleteNode(rootNode.rightChild , nodeValue)
+    
+    elif nodeValue < rootNode.data:
+        rootNode.leftChild = deleteNode(rootNode.leftChild , nodeValue)
+
+    else:
+        if rootNode.leftChild is None:
+            temp = rootNode.rightChild
+            rootNode = None
+            return temp
+
+        elif rootNode.rightChild is None:
+            temp = rootNode.leftChild
+            rootNode = None
+            return temp
+
+        temp = getMinValue(rootNode.rightChild)
+        rootNode.data = temp.data
+        rootNode.rightChild = deleteNode(rootNode.rightChild , temp.data)
+
+    balance = getBalance(rootNode)
+    if balance > 1 and getBalance(rootNode.leftChild) >= 0:
+        return rightRotation(rootNode)
+    if balance > 1 and getBalance(rootNode.leftChild) < 0:
+        rootNode.leftChild = leftRotation(rootNode.leftChild)
+        return rightRotation(rootNode)
+    if balance < -1 and getBalance(rootNode.rightChild) <= 0:
+        return leftRotation(rootNode)
+    if balance < -1 and getBalance(rootNode.rightChild) > 0:
+        rootNode.rightChild = rightRotation(rootNode.rightChild)
+        return leftRotation(rootNode)
+    
+    return rootNode
+
+def deleteTree(rootNode):
+    rootNode.data = None
+    rootNode.leftChild = None
+    rootNode.rightChild = None
+    return 'Tree deleted .'
