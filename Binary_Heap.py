@@ -84,7 +84,6 @@ def heapifyExtractTree(rootNode , index , heapType):
                 rootNode.customList[index], rootNode.customList[swapChild] = rootNode.customList[swapChild], rootNode.customList[index]
                 heapifyExtractTree(rootNode, swapChild, heapType)
 
-
 def extractNode(rootNode , heapType):
     if rootNode.heapize == 0:
         return
