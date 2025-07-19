@@ -22,7 +22,7 @@ def levelOrderTraversal(rootNode):
         return
     else:
         for i in range(1 , rootNode.heapSize+1):
-            print(i)
+            print(rootNode.customList[i])
 
 def heapifyTreeInsert(rootNode , index , heapType):
     if not rootNode or index <= 1 or index > rootNode.heapSize:
@@ -47,3 +47,60 @@ def insertNode(nodeValue , rootNode , heapType):
     rootNode.heapSize += 1
     heapifyTreeInsert(rootNode, rootNode.heapSize, heapType)
 
+def heapifyExtractTree(rootNode , index , heapType):
+    leftIndex = index*2
+    rightIndex = index*2 + 1
+    swapChild = 0
+
+    if rootNode.heapSize > index :
+        return
+
+    elif rootNode.heapSize == leftIndex :
+        if heapType == "min":
+            if rootNode.customList[index] > rootNode.customList[leftIndex]:
+                rootNode.customList[index], rootNode.customList[leftIndex] = rootNode.customList[leftIndex], rootNode.customList[index]
+        elif heapType == "max":
+            if rootNode.customList[index] < rootNode.customList[leftIndex]:
+                rootNode.customList[index], rootNode.customList[leftIndex] = rootNode.customList[leftIndex], rootNode.customList[index]
+
+    else:
+        if heapType == "min":
+            if rootNode.customList[leftIndex] < rootNode.customList[rightIndex]:
+                swapChild = leftIndex
+            else:
+                swapChild = rightIndex
+
+            if rootNode.customList[index] > rootNode.customList[swapChild]:
+                rootNode.customList[index], rootNode.customList[swapChild] = rootNode.customList[swapChild], rootNode.customList[index]
+                heapifyExtractTree(rootNode, swapChild, heapType)
+
+        elif heapType == "max":
+            if rootNode.customList[leftIndex] > rootNode.customList[rightIndex]:
+                swapChild = leftIndex
+            else:
+                swapChild = rightIndex
+
+            if rootNode.customList[index] < rootNode.customList[swapChild]:
+                rootNode.customList[index], rootNode.customList[swapChild] = rootNode.customList[swapChild], rootNode.customList[index]
+                heapifyExtractTree(rootNode, swapChild, heapType)
+
+
+def extractNode(rootNode , heapType):
+    if rootNode.heapize == 0:
+        return
+    else:
+        extractedNode = rootNode.customList[1]
+        rootNode.customList[1] = rootNode.customList[rootNode.heapSize]
+        rootNode.customList[rootNode.heapSize] = None
+        rootNode.heapSize -= 1
+        heapifyExtractTree(rootNode, 1, heapType)
+        return extractedNode
+
+def deleteHeap(rootNode):
+    if not rootNode:
+        return
+    else:
+        rootNode.customList = None
+        rootNode.heapSize = 0
+        rootNode.maxSize = 0
+        return True
