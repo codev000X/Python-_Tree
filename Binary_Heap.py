@@ -52,7 +52,7 @@ def heapifyExtractTree(rootNode , index , heapType):
     rightIndex = index*2 + 1
     swapChild = 0
 
-    if rootNode.heapSize > index :
+    if index > rootNode.heapSize :
         return
 
     elif rootNode.heapSize == leftIndex :
