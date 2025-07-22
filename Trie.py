@@ -19,6 +19,20 @@ class Trie:
         curr.endString = True
         print('Successfully inserted')
 
+    def searchString(self , word):
+        curr = self.root
+        for ch in word:
+            node = curr.children[ch]
+            if not node:
+                return False
+            curr = node
+        
+        if curr.endString == True:
+            return True
+        return False
+
+
 trie = Trie()
 trie.insert("hello")
 print(trie.root.children)
+print(trie.searchString('hell'))
