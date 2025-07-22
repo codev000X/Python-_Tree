@@ -32,6 +32,36 @@ class Trie:
         return False
 
 
+def deleteNode(root, word, index):
+
+    if index == len(word):
+        if root.endString:
+            root.endString = False
+            return len(root.children) == 0
+        return False
+
+    ch = word[index]
+    curr = root.children.get(ch)
+
+    if curr is None:
+        return False 
+
+    shouldDeleteChild = deleteNode(curr, word, index + 1)
+
+    if shouldDeleteChild:
+        del root.children[ch]
+        return not root.endString and len(root.children) == 0
+
+    return False
+
+
+
+
+
+
+
+
+
 trie = Trie()
 trie.insert("hello")
 print(trie.root.children)
