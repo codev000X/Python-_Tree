@@ -31,9 +31,7 @@ class Trie:
             return True
         return False
 
-
 def deleteNode(root, word, index):
-
     if index == len(word):
         if root.endString:
             root.endString = False
@@ -53,16 +51,3 @@ def deleteNode(root, word, index):
         return not root.endString and len(root.children) == 0
 
     return False
-
-
-
-
-
-
-
-
-
-trie = Trie()
-trie.insert("hello")
-print(trie.root.children)
-print(trie.searchString('hell'))
